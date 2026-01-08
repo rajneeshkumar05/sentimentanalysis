@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-xl w-full">
+        <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100">
+            
+            <div class="h-3 w-full {% if sentiment == 'Positive' %}bg-emerald-500{% elif sentiment == 'Negative' %}bg-rose-500{% else %}bg-amber-500{% endif %}"></div>
 
+            <div class="p-10">
+                <div class="flex justify-between items-start mb-8">
+                    <div>
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mb-1">Analysis Complete</p>
+                        <h2 class="text-3xl font-extrabold text-slate-900">The verdict is...</h2>
+                    </div>
+                    <div class="text-5xl animate-bounce">
+                        {% if sentiment == 'Positive' %}😊{% elif sentiment == 'Negative' %}😞{% else %}😐{% endif %}
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border-l-4 {% if sentiment == 'Positive' %}border-emerald-500{% elif sentiment == 'Negative' %}border-rose-500{% else %}border-amber-500{% endif %} p-5 rounded-r-2xl mb-10">
+                    <p class="text-slate-600 italic leading-relaxed">"{{ original_text }}"</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 mb-10">
+                    <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                        <p class="text-slate-500 text-xs font-bold uppercase mb-2 tracking-wider">Sentiment</p>
+                        <p class="text-2xl font-black {% if sentiment == 'Positive' %}text-emerald-600{% elif sentiment == 'Negative' %}text-rose-600{% else %}text-amber-600{% endif %}">
+                            {{ sentiment }}
+                        </p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                        <p class="text-slate-500 text-xs font-bold uppercase mb-2 tracking-wider">Confidence</p>
+                        <p class="text-2xl font-black text-slate-800">{{ score }}%</p>
+                    </div>
+                </div>
+
+                <a href="/" class="group flex items-center justify-center w-full py-5 bg-slate-900 hover:bg-black text-white rounded-2xl font-bold transition-all duration-300 shadow-xl shadow-slate-200">
+                    <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Try Another Text
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
